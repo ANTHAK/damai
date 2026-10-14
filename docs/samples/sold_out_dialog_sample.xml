@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='utf-8'?>
+<hierarchy rotation="0">
+
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,960][1440,2341]" drawing-order="0" hint="" display-id="0">
+
+    <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,960][1440,2341]" drawing-order="1" hint="" display-id="0">
+
+      <node index="0" text="" resource-id="android:id/content" class="android.widget.FrameLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,960][1440,2341]" drawing-order="1" hint="" display-id="0">
+
+        <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,960][1440,2341]" drawing-order="1" hint="" display-id="0">
+
+          <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,960][1440,2341]" drawing-order="1" hint="" display-id="0">
+
+            <node index="0" text="" resource-id="cn.damai:id/damai_theme_dialog_layout" class="android.widget.LinearLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[131,960][1309,2181]" drawing-order="1" hint="" display-id="0">
+
+              <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[131,960][1309,1712]" drawing-order="1" hint="" display-id="0">
+
+                <node index="0" text="" resource-id="cn.damai:id/damai_theme_dialog_top_image" class="android.widget.ImageView" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[131,960][1306,1712]" drawing-order="2" hint="" display-id="0" />
+
+                <node index="1" text="" resource-id="cn.damai:id/damai_theme_dialog_top_image_bg" class="android.widget.ImageView" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[131,1049][1308,1712]" drawing-order="1" hint="" display-id="0" />
+
+              </node>
+
+              <node index="1" text="" resource-id="cn.damai:id/damai_theme_dialog_container" class="android.widget.LinearLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[131,1712][1308,2181]" drawing-order="2" hint="" display-id="0">
+
+                <node index="0" text="" resource-id="cn.damai:id/damai_theme_dialog_content_layout" class="android.widget.ScrollView" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[244,1757][1195,1915]" drawing-order="2" hint="" display-id="0">
+
+                  <node index="0" text="" resource-id="cn.damai:id/damai_theme_dialog_content_container" class="android.widget.FrameLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[244,1757][1195,1908]" drawing-order="1" hint="" display-id="0">
+
+                    <node index="0" text="对不起，您选购的商品库存不足，请重新选购" resource-id="cn.damai:id/damai_theme_dialog_tip_content" class="android.widget.TextView" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[244,1757][1195,1908]" drawing-order="1" hint="" display-id="0" />
+
+                  </node>
+
+                </node>
+
+                <node index="1" text="" resource-id="" class="android.widget.LinearLayout" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[131,1915][1308,2181]" drawing-order="3" hint="" display-id="0">
+
+                  <node index="0" text="返回重新选购" resource-id="cn.damai:id/damai_theme_dialog_confirm_btn" class="android.widget.TextView" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[244,1975][1195,2125]" drawing-order="1" hint="" display-id="0" />
+
+                </node>
+
+              </node>
+
+            </node>
+
+            <node index="1" text="" resource-id="cn.damai:id/damai_theme_dialog_bottom_space" class="android.view.View" package="cn.damai" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,2181][1440,2341]" drawing-order="2" hint="" display-id="0" />
+
+          </node>
+
+        </node>
+
+      </node>
+
+    </node>
+
+  </node>
+
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="0" hint="" display-id="0">
+
+    <node NAF="true" index="0" text="" resource-id="miui.systemui.plugin:id/empty_content_view" class="android.view.View" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="true" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0" />
+
+    <node index="1" text="" resource-id="miui.systemui.plugin:id/island_container" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="4" hint="" display-id="0">
+
+      <node index="0" text="" resource-id="miui.systemui.plugin:id/island_content" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0">
+
+        <node index="0" text="" resource-id="miui.systemui.plugin:id/container" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0">
+
+          <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0">
+
+            <node index="0" text="" resource-id="" class="android.view.View" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0" />
+
+            <node index="1" text="" resource-id="miui.systemui.plugin:id/big_island_view" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[355,20][1093,145]" drawing-order="4" hint="" display-id="0">
+
+              <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[355,20][1093,145]" drawing-order="1" hint="" display-id="0">
+
+                <node index="0" text="" resource-id="miui.systemui.plugin:id/big_container" class="android.widget.LinearLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[355,20][1093,145]" drawing-order="2" hint="" display-id="0">
+
+                  <node index="0" text="" resource-id="miui.systemui.plugin:id/area_left" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[355,20][684,145]" drawing-order="1" hint="" display-id="0">
+
+                    <node index="0" text="" resource-id="miui.systemui.plugin:id/island_container_module_image_text_1" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[384,20][680,145]" drawing-order="1" hint="" display-id="0">
+
+                      <node index="0" text="" resource-id="miui.systemui.plugin:id/island_container_module_icon" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[384,46][465,119]" drawing-order="1" hint="" display-id="0">
+
+                        <node index="0" text="" resource-id="miui.systemui.plugin:id/island_fix_icon" class="android.widget.ImageView" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[388,46][461,119]" drawing-order="2" hint="" display-id="0" />
+
+                      </node>
+
+                      <node index="1" text="" resource-id="miui.systemui.plugin:id/island_container_module_text" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[465,35][680,130]" drawing-order="2" hint="" display-id="0">
+
+                        <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[465,35][680,130]" drawing-order="1" hint="" display-id="0">
+
+                          <node index="0" text="" resource-id="miui.systemui.plugin:id/island_title" class="android.widget.TextView" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[476,35][680,130]" drawing-order="2" hint="" display-id="0" />
+
+                        </node>
+
+                      </node>
+
+                    </node>
+
+                  </node>
+
+                  <node index="1" text="" resource-id="miui.systemui.plugin:id/area_cutout" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[684,20][764,145]" drawing-order="2" hint="" display-id="0" />
+
+                  <node index="2" text="" resource-id="miui.systemui.plugin:id/area_right" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[764,20][1093,145]" drawing-order="3" hint="" display-id="0">
+
+                    <node index="0" text="" resource-id="miui.systemui.plugin:id/island_container_module_right_text" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[900,20][1064,145]" drawing-order="1" hint="" display-id="0">
+
+                      <node index="0" text="" resource-id="" class="android.widget.LinearLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[900,20][1064,145]" drawing-order="1" hint="" display-id="0">
+
+                        <node index="0" text="" resource-id="miui.systemui.plugin:id/island_title" class="android.widget.TextView" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[900,35][1053,130]" drawing-order="2" hint="" display-id="0" />
+
+                      </node>
+
+                    </node>
+
+                  </node>
+
+                </node>
+
+              </node>
+
+            </node>
+
+          </node>
+
+        </node>
+
+      </node>
+
+    </node>
+
+    <node index="2" text="" resource-id="miui.systemui.plugin:id/glow_effect_bottom_container" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="2" hint="" display-id="0">
+
+      <node index="0" text="" resource-id="" class="android.view.View" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0" />
+
+      <node index="1" text="" resource-id="" class="android.view.View" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[351,20][1089,145]" drawing-order="2" hint="" display-id="0" />
+
+    </node>
+
+    <node index="3" text="" resource-id="miui.systemui.plugin:id/glow_effect_top_container" class="android.widget.FrameLayout" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="5" hint="" display-id="0">
+
+      <node index="0" text="" resource-id="" class="android.view.View" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[315,6][1125,159]" drawing-order="1" hint="" display-id="0" />
+
+      <node index="1" text="" resource-id="" class="android.view.View" package="miui.systemui.plugin" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[351,20][1089,145]" drawing-order="2" hint="" display-id="0" />
+
+    </node>
+
+  </node>
+
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,0][1440,161]" drawing-order="0" hint="" display-id="0">
+
+    <node index="0" text="" resource-id="com.android.systemui:id/status_bar_launch_animation_container" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,0][1440,161]" drawing-order="1" hint="" display-id="0" />
+
+    <node index="1" text="" resource-id="com.android.systemui:id/status_bar_container" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,0][1440,161]" drawing-order="2" hint="" display-id="0">
+
+      <node index="0" text="" resource-id="com.android.systemui:id/status_bar" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,0][1440,157]" drawing-order="1" hint="" display-id="0">
+
+        <node index="0" text="" resource-id="com.android.systemui:id/status_bar_icons" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,0][1440,157]" drawing-order="2" hint="" display-id="0">
+
+          <node index="0" text="" resource-id="com.android.systemui:id/status_bar_contents" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[87,0][1353,157]" drawing-order="2" hint="" display-id="0">
+
+            <node index="0" text="" resource-id="com.android.systemui:id/phone_status_bar_left_container" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[87,26][665,134]" drawing-order="1" hint="" display-id="0">
+
+              <node index="1" text="" resource-id="com.android.systemui:id/clock" class="android.widget.TextView" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[87,26][223,134]" drawing-order="3" hint="" display-id="0" />
+
+              <node index="2" text="" resource-id="com.android.systemui:id/notification_icon_area" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[231,26][665,134]" drawing-order="7" hint="" display-id="0">
+
+                <node index="0" text="" resource-id="com.android.systemui:id/notificationIcons" class="android.view.ViewGroup" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[231,26][365,134]" drawing-order="1" hint="" display-id="0">
+
+                  <node index="3" text="" resource-id="" class="" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[231,26][298,134]" drawing-order="1" hint="" display-id="0" />
+
+                </node>
+
+              </node>
+
+            </node>
+
+            <node index="1" text="" resource-id="com.android.systemui:id/cutout_space_view" class="android.view.View" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[680,0][760,157]" drawing-order="2" hint="" display-id="0" />
+
+            <node index="2" text="" resource-id="com.android.systemui:id/system_icon_area" class="android.view.ViewGroup" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[775,26][1353,134]" drawing-order="3" hint="" display-id="0">
+
+              <node index="0" text="" resource-id="com.android.systemui:id/system_icons" class="android.view.ViewGroup" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[775,26][1353,134]" drawing-order="3" hint="" display-id="0">
+
+                <node index="0" text="" resource-id="com.android.systemui:id/statusIcons" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[779,26][1229,134]" drawing-order="1" hint="" display-id="0">
+
+                  <node index="4" text="" resource-id="com.android.systemui:id/wifi_combo" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1154,42][1229,117]" drawing-order="40" hint="" display-id="0">
+
+                    <node index="0" text="" resource-id="com.android.systemui:id/wifi_group" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1154,42][1229,117]" drawing-order="1" hint="" display-id="0">
+
+                      <node index="0" text="" resource-id="com.android.systemui:id/wifi_signal" class="android.widget.ImageView" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1154,42][1229,117]" drawing-order="1" hint="" display-id="0" />
+
+                      <node index="1" text="" resource-id="com.android.systemui:id/wifi_activity" class="android.widget.ImageView" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1206,42][1229,117]" drawing-order="2" hint="" display-id="0" />
+
+                    </node>
+
+                  </node>
+
+                </node>
+
+                <node index="1" text="" resource-id="com.android.systemui:id/battery" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1229,26][1353,134]" drawing-order="3" hint="" display-id="0">
+
+                  <node index="0" text="" resource-id="com.android.systemui:id/battery_icon_container" class="android.widget.FrameLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1229,26][1334,134]" drawing-order="1" hint="" display-id="0">
+
+                    <node index="0" text="" resource-id="com.android.systemui:id/hollow_battery_image" class="android.widget.ImageView" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1229,42][1334,117]" drawing-order="2" hint="" display-id="0" />
+
+                  </node>
+
+                  <node index="1" text="" resource-id="com.android.systemui:id/battery_charge_out_image" class="android.widget.ImageView" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1334,26][1353,134]" drawing-order="2" hint="" display-id="0" />
+
+                </node>
+
+              </node>
+
+            </node>
+
+          </node>
+
+          <node index="1" text="" resource-id="com.android.systemui:id/focused_parent" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[87,0][680,157]" drawing-order="3" hint="" display-id="0">
+
+            <node index="0" text="" resource-id="com.android.systemui:id/focused_notifi_start" class="android.view.View" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[98,78][237,81]" drawing-order="1" hint="" display-id="0" />
+
+          </node>
+
+        </node>
+
+        <node index="1" text="" resource-id="com.android.systemui:id/privacy_area" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1364,0][1440,157]" drawing-order="1" hint="" display-id="0">
+
+          <node index="0" text="" resource-id="com.android.systemui:id/privacy_container" class="android.widget.LinearLayout" package="com.android.systemui" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[1375,26][1399,134]" drawing-order="1" hint="" display-id="0" />
+
+        </node>
+
+      </node>
+
+    </node>
+
+  </node>
+
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="com.miui.home" content-desc="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" scrollable="false" long-clickable="false" password="false" selected="false" visible-to-user="true" bounds="[0,3109][1440,3200]" drawing-order="0" hint="" display-id="0" />
+
+</hierarchy>

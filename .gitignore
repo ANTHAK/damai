@@ -1,0 +1,17 @@
+# Python 环境与字节码
+.venv/
+.venv-phone/
+__pycache__/
+*.pyc
+
+# 运行产物：截图 / 界面层级 XML / 日志 / 结果 JSON
+# 注意：这些文件里会有你的手机号、观演人姓名、订单信息，千万不要提交
+artifacts/
+
+# 本地下载的 Android platform-tools（体积大，各自从官方下载）
+platform-tools/
+platform-tools*.zip
+
+# 编辑器
+.vscode/
+.idea/
