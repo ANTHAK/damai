@@ -59,6 +59,8 @@ THREAD_JOIN_TIMEOUT_S = 3.0
 # 原状态机对同一弹窗只点一次，导致空等 30 秒。现在弹窗持续存在超过
 # RETRY_REPEAT_AFTER_S 秒就再点一次（只在探测到弹窗仍在时才点）。
 RETRY_REPEAT_AFTER_S = 1.0
+# 选座页「确认选座」按钮的重复点击间隔（按钮不消失就再点）。
+SEAT_REPEAT_AFTER_S = 1.5
 # 同一弹窗持续存在时，自动保存界面层级 + 截图到 artifacts\，最多保存几份。
 DIALOG_SNAPSHOT_LIMIT = 3
 # K80 修复（2026-10-14 13:00 实战）：确认页一直被判为 order_page_loading，
@@ -66,7 +68,7 @@ DIALOG_SNAPSHOT_LIMIT = 3
 # 停留超过 STUCK_PAGE_SNAPSHOT_AFTER_S 秒也会保存现场（只读，不点击）。
 STUCK_PAGE_SNAPSHOT_AFTER_S = 3.0
 STUCK_PAGE_SNAPSHOT_LIMIT = 3
-STUCK_SNAPSHOT_PAGES = ("order_page_loading", "damai_other", "order_page")
+STUCK_SNAPSHOT_PAGES = ("order_page_loading", "damai_other", "order_page", "seat_page")
 # 现场里额外记录屏幕底部区域（按钮所在位置）的控件文字，便于看出「立即提交」变成了什么。
 BOTTOM_AREA_TOP_RATIO = 0.80
 # 页面无变化时，每隔多少秒输出一条 heartbeat 日志。
@@ -79,6 +81,10 @@ RETRY_RESOURCE = "cn.damai:id/damai_theme_dialog_confirm_btn"
 BACK_REDIRECT_RESOURCE = "cn.damai:id/damai_theme_dialog_cancel_btn"
 RISK_RESOURCE = "cn.damai:id/water_mark_view_id"
 SUBMIT_TEXT = "立即提交"
+# 选座票：进入选座页（TSeatActivity）后，要点底部「确认选座」才能进确认页。
+# 2026-10-14 15:00 实战：选座票卡在这一页，盲点坐标 (1119,3088) 擦着按钮上边缘过不去。
+SEAT_CONFIRM_RESOURCE = "cn.damai:id/seat_confirm_order"
+SEAT_CONFIRM_TEXTS = ("确认选座", "确认选座并支付")
 TIP_RESOURCE = "cn.damai:id/damai_theme_dialog_tip_content"
 # K80 修复（2026-10-14 12:20 实战）：库存不足弹窗的「返回重新选购」与「继续尝试」
 # 共用 damai_theme_dialog_confirm_btn，只看 resource-id 会把它误判成重试弹窗。
@@ -92,6 +98,7 @@ SOLD_OUT_CONFIRM_COUNT = 2
 RETRY_POINT_MAX_AGE_S = 1.0
 
 PAGE_RETRY_DIALOG = "retry_dialog"
+PAGE_SEAT_PAGE = "seat_page"
 PAGE_SOLD_OUT_DIALOG = "sold_out_dialog"
 PAGE_UNKNOWN_DIALOG = "unknown_dialog"
 PAGE_TERMINAL_DIALOG = "terminal_dialog"
@@ -128,6 +135,8 @@ class RuntimeState:
     first_tap_wall_time: str | None = None
     risk_wait_started: float | None = None
     skipped_retry_count: int = 0
+    seat_tap_count: int = 0
+    skipped_seat_count: int = 0
     lock: threading.Lock = field(default_factory=threading.Lock, repr=False)
 
     def update_package(self, package: str) -> None:
@@ -152,6 +161,18 @@ class RuntimeState:
     def record_skipped_retry(self) -> None:
         with self.lock:
             self.skipped_retry_count += 1
+
+    def record_seat_tap(self) -> None:
+        with self.lock:
+            if self.first_tap_wall_time is None:
+                self.first_tap_wall_time = datetime.now().astimezone().isoformat(
+                    timespec="milliseconds"
+                )
+            self.seat_tap_count += 1
+
+    def record_skipped_seat(self) -> None:
+        with self.lock:
+            self.skipped_seat_count += 1
 
     def record_probe(self, page: str) -> None:
         with self.lock:
@@ -248,6 +269,8 @@ class Mode0StateController:
         self.clock = clock
         self.last_retry_at: float | None = None
         self.retry_repeat_count = 0
+        self.last_seat_at: float | None = None
+        self.seat_click_count = 0
         self.sold_out_streak = 0
         self.unknown_dialog_hits = 0
 
@@ -274,6 +297,21 @@ class Mode0StateController:
                 clear_pending=True,
                 entered_risk=entered_risk,
             )
+
+        # 选座页：点「确认选座」进入确认页。座位由大麦已分配/已锁定，脚本不挑座位。
+        # 每 SEAT_REPEAT_AFTER_S 秒最多点一次，按钮由探测线程实时定位。
+        if page == PAGE_SEAT_PAGE:
+            self.sold_out_streak = 0
+            self.terminal_streak = 0
+            now = self.clock()
+            if (
+                self.last_seat_at is None
+                or now - self.last_seat_at >= SEAT_REPEAT_AFTER_S
+            ):
+                self.last_seat_at = now
+                self.seat_click_count += 1
+                return StateDecision(previous, self.phase, action="seat")
+            return StateDecision(previous, self.phase)
 
         # 库存不足弹窗：绝不点击，连续确认 SOLD_OUT_CONFIRM_COUNT 次后停止。
         if page == PAGE_SOLD_OUT_DIALOG:
@@ -393,7 +431,7 @@ class TapRequestQueue:
         self.changed = threading.Event()
 
     def request(self, action: str) -> bool:
-        if action not in ("main", "submit", "retry", "back"):
+        if action not in ("main", "submit", "retry", "back", "seat"):
             raise ValueError(f"未知点击动作：{action}")
         with self._lock:
             if self._pending is not None:
@@ -609,6 +647,17 @@ def classify_hierarchy_xml(xml_text: str) -> str:
             "",
         )
         return classify_confirm_button(confirm.attrib.get("text", ""), tip)
+    seat = next(
+        (
+            node
+            for node in nodes
+            if node.attrib.get("resource-id") == SEAT_CONFIRM_RESOURCE
+            and node.attrib.get("text", "").strip() in SEAT_CONFIRM_TEXTS
+        ),
+        None,
+    )
+    if seat is not None:
+        return PAGE_SEAT_PAGE
     if has_resource(BACK_REDIRECT_RESOURCE, clickable=True):
         return PAGE_TERMINAL_DIALOG
     if any(
@@ -680,6 +729,7 @@ class FastPageProbe:
     def __init__(self, device: object, retry_points: RetryPointHolder | None = None) -> None:
         self.device = device
         self.retry_points = retry_points or RetryPointHolder()
+        self.seat_points = RetryPointHolder()
         self.last_dialog_text = ""
         self.order_title = device(resourceId=ORDER_TITLE_RESOURCE)
         self.tip = device(resourceId=TIP_RESOURCE)
@@ -694,6 +744,11 @@ class FastPageProbe:
             clickable=True,
         )
         self.risk = device(resourceId=RISK_RESOURCE)
+        self.seat_confirm = device(
+            resourceId=SEAT_CONFIRM_RESOURCE,
+            clickable=True,
+            textContains="确认选座",
+        )
 
     def read(self, phase: str) -> str:
         submit_checked = False
@@ -701,12 +756,20 @@ class FastPageProbe:
             submit_checked = True
             if self.submit.exists(timeout=0):
                 self.retry_points.clear()
+                self.seat_points.clear()
                 return PAGE_ORDER_PAGE
         if self.retry.exists(timeout=0):
             dialog = self._classify_dialog()
             if dialog is not None:
+                self.seat_points.clear()
                 return dialog
         self.retry_points.clear()
+        # 选座页：识别「确认选座」按钮，记录它的实测位置供点击线程使用。
+        if self.seat_confirm.exists(timeout=0):
+            seat = self._classify_seat()
+            if seat is not None:
+                return seat
+        self.seat_points.clear()
         if phase in ("await_result", "risk_back_requested") and self.back_redirect.exists(
             timeout=0
         ):
@@ -743,6 +806,23 @@ class FastPageProbe:
         else:
             self.retry_points.clear()
         return dialog
+
+    def _classify_seat(self) -> str | None:
+        """识别选座页的「确认选座」按钮，记录实测中心点。按钮消失时返回 None。"""
+        try:
+            info = self.seat_confirm.info
+        except Exception:
+            return None
+        text = str(info.get("text") or "").strip()
+        if text not in SEAT_CONFIRM_TEXTS:
+            self.seat_points.clear()
+            return PAGE_SEAT_PAGE
+        center = bounds_center(info.get("visibleBounds") or info.get("bounds"))
+        if center is None:
+            self.seat_points.clear()
+            return PAGE_SEAT_PAGE
+        self.seat_points.set(center)
+        return PAGE_SEAT_PAGE
 
 
 def summarize_bottom_controls(
@@ -927,6 +1007,7 @@ def tap_loop(
     tap_shell: PersistentTapShell,
     query_shell: PersistentQueryShell,
     retry_points: RetryPointHolder | None = None,
+    seat_points: RetryPointHolder | None = None,
 ) -> None:
     try:
         if not wait_until(schedule.click_start_monotonic, stop_event):
@@ -978,6 +1059,15 @@ def tap_loop(
                     state.record_risk_back()
                     continue
                 retry = action == "retry"
+                if action == "seat":
+                    # 只点探测线程刚实测到的「确认选座」按钮中心；拿不到就不点。
+                    point = seat_points.fresh() if seat_points is not None else None
+                    if point is None:
+                        state.record_skipped_seat()
+                        continue
+                    tap_shell.tap(point)
+                    state.record_seat_tap()
+                    continue
                 if retry:
                     # 只点探测线程刚实测到的「继续尝试」按钮中心；拿不到就不点。
                     point = retry_points.fresh() if retry_points is not None else None
@@ -1126,6 +1216,7 @@ def run(sale_time: datetime) -> dict[str, object]:
             tap_shell,
             query_shell,
             retry_points,
+            page_probe.inner.seat_points,
         ),
         name="damai-mode0-k80-tap-loop",
         daemon=True,
@@ -1158,6 +1249,9 @@ def run(sale_time: datetime) -> dict[str, object]:
     result.update(
         {
             "retry_repeat_count": controller.retry_repeat_count,
+            "seat_click_count": controller.seat_click_count,
+            "seat_tap_count": state.seat_tap_count,
+            "skipped_seat_count": state.skipped_seat_count,
             "skipped_retry_count": state.skipped_retry_count,
             "sold_out_dialog_seen": controller.sold_out_streak > 0
             or result.get("last_page") == PAGE_SOLD_OUT_DIALOG,
@@ -1175,6 +1269,7 @@ def run(sale_time: datetime) -> dict[str, object]:
             "retry_dialog_point": "measured_from_retry_button_bounds",
             "safety": (
                 "stops_on_alipay_foreground_or_terminal_or_sold_out_dialog; "
+                "clicks_seat_confirm_when_on_seat_page; "
                 "clicks_retry_only_when_button_text_is_继续尝试; "
                 "never_clicks_unknown_dialog; "
                 "backs_once_from_risk_verification; "

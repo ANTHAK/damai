@@ -250,8 +250,82 @@ class StuckPageSnapshotTests(unittest.TestCase):
         self.assertFalse(rows[0]["enabled"])
 
 
-# 2026-10-14 12:20 实战自动保存的库存不足弹窗现场（已脱敏：去掉手机号、系统状态栏）
-SOLD_OUT_XML = Path(__file__).resolve().parent.parent / "docs" / "samples" / "sold_out_dialog_sample.xml"
+ARTIFACTS = Path(__file__).resolve().parent.parent / "artifacts"
+
+
+class SeatPageTests(unittest.TestCase):
+    """15:00 实战：选座票会卡在选座页，脚本必须点「确认选座」且不挑座位。"""
+
+    SEAT_XML = ARTIFACTS / "stuck_damai_other_20261014_150455_692.xml"
+
+    def make_seat_probe(self, button_text: str, bounds: dict) -> k80.FastPageProbe:
+        holder = k80.RetryPointHolder()
+        probe = k80.FastPageProbe.__new__(k80.FastPageProbe)
+        probe.retry_points = holder
+        probe.seat_points = k80.RetryPointHolder()
+        probe.last_dialog_text = ""
+        probe.seat_confirm = FakeSelector({"text": button_text, "visibleBounds": bounds})
+        probe.retry = FakeSelector(None)
+        probe.tip = FakeSelector(None)
+        probe.submit = FakeSelector(None)
+        probe.back_redirect = FakeSelector(None)
+        probe.risk = FakeSelector(None)
+        probe.order_title = FakeSelector(None)
+        return probe
+
+    def test_seat_page_records_measured_center(self) -> None:
+        probe = self.make_seat_probe(
+            "确认选座", {"left": 784, "top": 2945, "right": 1384, "bottom": 3118}
+        )
+        self.assertEqual(probe.read("blind"), k80.PAGE_SEAT_PAGE)
+        # 中心 = ((784+1384)/2, (2945+3118)/2) = (1084, 3031)，与盲点坐标 (1119,3088) 不同
+        self.assertEqual(probe.seat_points.fresh(), (1084, 3031))
+
+    def test_seat_page_wrong_text_not_recorded(self) -> None:
+        probe = self.make_seat_probe(
+            "选好了", {"left": 784, "top": 2945, "right": 1384, "bottom": 3118}
+        )
+        self.assertEqual(probe.read("blind"), k80.PAGE_SEAT_PAGE)
+        self.assertIsNone(probe.seat_points.fresh())
+
+    def test_seat_page_emits_seat_action_with_throttle(self) -> None:
+        clock = FakeClock()
+        c = k80.Mode0StateController(clock=clock)
+        d1 = c.observe(k80.PAGE_SEAT_PAGE)
+        self.assertEqual(d1.action, "seat")
+        clock.now = 0.5  # 未到间隔
+        self.assertIsNone(c.observe(k80.PAGE_SEAT_PAGE).action)
+        clock.now = 1.6  # 超过 SEAT_REPEAT_AFTER_S
+        self.assertEqual(c.observe(k80.PAGE_SEAT_PAGE).action, "seat")
+        self.assertEqual(c.seat_click_count, 2)
+
+    def test_seat_page_does_not_stop(self) -> None:
+        clock = FakeClock()
+        c = k80.Mode0StateController(clock=clock)
+        for i in range(20):
+            clock.now = i * 2.0
+            d = c.observe(k80.PAGE_SEAT_PAGE)
+            self.assertIsNone(d.status)
+            self.assertIsNotNone(d.action)  # 每 1.5s 都会点一次
+
+    @unittest.skipUnless(
+        ARTIFACTS.joinpath("stuck_damai_other_20261014_150455_692.xml").exists(),
+        "缺少 15:00 选座页实战快照",
+    )
+    def test_real_1500_seat_snapshot_is_seat_page(self) -> None:
+        xml = self.SEAT_XML.read_text(encoding="utf-8")
+        self.assertEqual(k80.classify_hierarchy_xml(xml), k80.PAGE_SEAT_PAGE)
+
+    def test_classify_hierarchy_seat_page(self) -> None:
+        xml = (
+            "<hierarchy>"
+            "<node resource-id='cn.damai:id/seat_confirm_order' text='确认选座' clickable='true' bounds='[784,2945][1384,3118]'/>"
+            "</hierarchy>"
+        )
+        self.assertEqual(k80.classify_hierarchy_xml(xml), k80.PAGE_SEAT_PAGE)
+
+
+SOLD_OUT_XML = ARTIFACTS / "stuck_retry_dialog_20261014_122036_927.xml"
 
 
 class SoldOutDialogTests(unittest.TestCase):
@@ -352,6 +426,7 @@ class ProbeClassificationTests(unittest.TestCase):
         holder = k80.RetryPointHolder()
         probe = k80.FastPageProbe.__new__(k80.FastPageProbe)
         probe.retry_points = holder
+        probe.seat_points = k80.RetryPointHolder()
         probe.last_dialog_text = ""
         probe.retry = FakeSelector({"text": button_text, "visibleBounds": bounds})
         probe.tip = FakeSelector({"text": tip_text})
@@ -359,6 +434,7 @@ class ProbeClassificationTests(unittest.TestCase):
         probe.back_redirect = FakeSelector(None)
         probe.risk = FakeSelector(None)
         probe.order_title = FakeSelector(None)
+        probe.seat_confirm = FakeSelector(None)
         return probe
 
     def test_sold_out_probe_has_no_tap_point(self) -> None:
