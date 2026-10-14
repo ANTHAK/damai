@@ -96,7 +96,7 @@
 ### 第 2 步：下载本项目
 
 ```powershell
-git clone https://github.com/Bytesparkx/damai-ticket-helper.git
+git clone https://github.com/ByteSparkX/damai.git
 cd damai-ticket-helper
 ```
 
